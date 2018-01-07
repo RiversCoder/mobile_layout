@@ -1,14 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html style="font-size:1px;">
 <head>
 	<meta charset="utf-8">
-	<meta name='viewport' content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum=1.0,user-scalable=no" />
+	<meta name='viewport' content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="x5-orientation" content="portrait">
 	<title>移动端布局</title>
-	<style type="text/css">
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+	<style type="text/css" id="myStyle">
 		*{margin:0;padding:0;}
+		html,body{width:100%;height:100%;}
+		body{overflow-x:hidden;}
+		.mycontainer .header{width:100%;height:128rpx;background:#fff;border-bottom:1px solid #eee;}
+		.header .h_left{width:107rpx;height:100%;background-image:url(./images/header_back.jpg);background-size:100% 100%; background-repeat:no-repeat;float:left;}
+		.header .h_title{width:544rpx;height:100%;font-size:41rpx;text-transform:uppercase;text-align:center;line-height:128rpx;color:#3a3a3a;float:left;}
+		.header .h_right{width:99rpx;height:100%;float:right;background-image:url(./images/header_icon.jpg);background-size:100% 100%; background-repeat:no-repeat;}
+		.mycontainer .content{width:100%;height:616rpx;position:relative;}
+		.content .slider{width:100%;height:616rpx;background-image:url(./images/content_image.jpg);background-size:100% 100%; background-repeat:no-repeat;}
+		.content .nextPrevBar{text-decoration:none;position:absolute;top:50%;color:#fff;width:10rpx;height:10rpx;margin-top:-5rpx;}
+		.content .prevBar{left:10rpx;}
+		.content .nextBar{right:30rpx;}
+		.listWrap{width:105rpx;height:15rpx;position:absolute;left:0;right:0;margin:auto;top:573rpx;list-style:none;}
+		.listWrap li{width:8rpx;height:8rpx;border-radius:50%;border:1rpx solid #ccc;float:left;margin-left:20rpx;margin-top:2rpx;}
+		.listWrap li:nth-of-type(1){margin-left:0;}
+		.listWrap li.active{transform: scale(1.5);background:#fff;}
+
+		.pcontent{width:100%;box-sizing:border-box;padding:40rpx 30rpx 0 40rpx;}
+		.pcontent .pc_title {width:120rpx;height:34rpx;border-radius:17rpx;background:#f6c87a;color:#fff;text-transform:uppercase;font-size:14rpx;line-height:34rpx;text-align:center;margin:0;}
+		.pcontent .pc_ctitle{line-height:40rpx;height:40rpx;font-size:32rpx;margin:0;margin-top:26rpx;}
+		.pcontent .pc_cctitle{line-height:82rpx;margin:0;font-size:20rpx;color:#919191;}
+		.pcontent .pc_ccontent{line-height:42rpx;color:#333;font-size:20rpx;margin:0;}
+		.pc_revies{line-height:61rpx;font-size:23rpx;color:#000;margin:0;}
+		.p_btns{width:100%;height:100rpx;margin-top:30rpx;}
+		.p_btns .abtn{text-align:center;line-height:100rpx;height:100rpx;border-radius:50rpx;text-transform:uppercase;font-size:22rpx;}
+		.p_btns .acrt{background:#daac56;color:#fff;width:420rpx;float:left;}
+		.p_btns .price{background:#fff;color:#888;width:238rpx;border:1px solid #daac56;float:right;}
 	</style>
+	
 </head>
 <body>
 	
+
+
+	<div class="mycontainer">
+		<section class="header">
+			<div class="h_left"></div>
+			<div class="h_title">POST</div>
+			<div class="h_right"></div>
+		</section>
+		<section class="content">
+			<div class="slider"><!--里面防止轮播list--></div>
+			<a class="glyphicon glyphicon-chevron-left nextPrevBar prevBar"></a>
+			<a class="glyphicon glyphicon-chevron-right nextPrevBar nextBar"></a>
+			<ul class="listWrap">
+				<li class="listItem active"></li>
+				<li class="listItem"></li>
+				<li class="listItem"></li>
+				<li class="listItem"></li>	
+			</ul>
+			
+			<div class="pcontent">
+				<h3 class="pc_title">LIPSTICK</h3>
+				<h4 class="pc_ctitle">Charlotte Tibury - Matte Revolution</h4>
+				<h5 class="pc_cctitle">only 5 left in stock</h5>
+				<p class="pc_ccontent">Make-up and cosmetics are used all over the world by all kinds of different people. Cosmetic products are defined as.</p>
+				<h6 class="pc_revies"><i> 5 Customers Revies </i></h6>
+
+				<div class="p_btns">
+					<a href="javascript:;" class="abtn acrt">ADD TO CART</a>
+					<a href="javascript:;" class="abtn price">$49.98</a>
+				</div>
+			</div>
+		</section>
+		<section class="footer"></section>
+	</div>
+
+		
+
+	<script type="text/javascript">
+			window.onresize = getSize;
+			function getSize(){
+				let html = window.documentElement|| document.getElementsByTagName('html')[0];
+				let htmlWidth = html.clientWidth;
+				console.log(htmlWidth);
+				let fontSize = htmlWidth/15;
+				html.style.fontSize = fontSize + 'px';
+				
+				return  fontSize;
+			}
+			getSize();
+	</script>
+	<script>
+		let myStyle = document.getElementById('myStyle');
+		var str = myStyle.innerHTML;
+		let regExp = /\s*(\d+\s*rpx)/gi;
+		
+		var proportion = Number.parseInt(750/15) ;
+		var strs = str.replace(regExp,($0,$1) => {
+			console.log($1);
+			return (Number.parseInt($1)/proportion) + 'rem ';
+		})
+		myStyle.innerHTML = strs;
+	</script>
 </body>
 </html>
